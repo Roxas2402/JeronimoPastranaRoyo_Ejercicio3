@@ -68,6 +68,7 @@ public class Main {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(file);
             document.getDocumentElement().normalize();
+            personajeList.clear();
 
             NodeList nodos = document.getElementsByTagName("personaje");
 
@@ -79,13 +80,8 @@ public class Main {
                     String descripcion = personaje.getElementsByTagName("descripcion").item(0).getTextContent();
                     Boolean sobrevive = Boolean.valueOf(personaje.getElementsByTagName("sobrevive").item(0).getTextContent());
                     int id = Integer.parseInt(personaje.getAttribute("id").toString());
-
                     PersonajeModel personaje1 = new PersonajeModel(id, nombre, descripcion, sobrevive);
-                    System.out.println(personaje1);
-
-                    for (PersonajeModel p : personajeList) {
-                        System.out.println(p.toString());
-                    }
+                    personajeList.add(personaje1);
                 }
             }
         } else {
